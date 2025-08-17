@@ -13,7 +13,7 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['RESULTS_FOLDER'], exist_ok=True)
 
 # Load YOLO model (ensure 'best.pt' is in the root folder)
-model = YOLO('best.pt')
+model = YOLO('Money-detector/best.pt')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
