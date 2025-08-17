@@ -23,4 +23,4 @@ COPY . .
 EXPOSE 5000
 
 # 8️⃣ Command to run the Flask app
-CMD ["python", "app.py"]
+CMD ["python", "Money-detector/app.py"]
