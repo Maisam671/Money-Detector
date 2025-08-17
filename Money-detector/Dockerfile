@@ -9,7 +9,8 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # 4️⃣ Copy requirements first (helps caching)
-COPY requirements.txt .
+COPY ./Money-detector/requirements.txt .
+
 
 # 5️⃣ Install dependencies
 RUN pip install --no-cache-dir --upgrade pip
