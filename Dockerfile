@@ -29,4 +29,5 @@ COPY static/ static/
 EXPOSE 5000
 
 # 8️⃣ Run Flask app
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "--workers", "1", "app:app"]
+
