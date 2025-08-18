@@ -1,0 +1,7 @@
+flask
+ultralytics
+opencv-python-headless
+numpy
+pillow
+gunicorn
+torch==2.0.1  # CPU-only version (smaller)
