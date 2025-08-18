@@ -16,7 +16,6 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir --upgrade pip
 
-RUN pip install torch==2.0.1 numpy==1.26.0
 RUN pip install --no-cache-dir -r requirements.txt
 
 
