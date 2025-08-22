@@ -31,13 +31,13 @@ def index():
                 source=upload_path,
                 save=True,
                 project='static/results',
-                name='predict',  # YOLO will save inside static/results/predict
+                name='predict', 
                 exist_ok=True
             )
 
             # Find the saved image path
-            saved_dir = Path(results[0].save_dir)  # Convert to Path object
-            detected_files = list(saved_dir.glob("*.jpg"))
+            saved_dir = Path(results[0].save_dir)  
+            detected_files = list(saved_dir.glob("*"))
 
             if detected_files:
                 detected_file = detected_files[0]
@@ -49,7 +49,46 @@ def index():
 
     return render_template('index.html', results_img_path=results_img_path)
 
+# @app.route('/static/<path:filename>')
+# def static_files(filename):
+#     return send_from_directory('static', filename)
+@app.route('/debug', methods=['GET'])
+def debug():
+    upload_files = os.listdir(app.config['UPLOAD_FOLDER'])
+    results_files = os.listdir(app.config['RESULTS_FOLDER'])
+    return {
+        'upload_files': upload_files,
+        'results_files': results_files,
+        'upload_path': app.config['UPLOAD_FOLDER'],
+        'results_path': app.config['RESULTS_FOLDER']
+    }
+
+# Uncomment and modify this route to serve static files
 @app.route('/static/<path:filename>')
 def static_files(filename):
     return send_from_directory('static', filename)
 
+# Add a new route to list static files
+@app.route('/static-files')
+def list_static_files():
+    uploads = os.listdir(app.config['UPLOAD_FOLDER'])
+    results = os.listdir(app.config['RESULTS_FOLDER'])
+    
+    files = {
+        'uploads': [f'/static/uploads/{f}' for f in uploads],
+        'results': [f'/static/results/{f}' for f in results]
+    }
+    
+    # Return a simple HTML page listing the files
+    html = '<h2>Static Files:</h2>'
+    html += '<h3>Uploads:</h3><ul>'
+    for f in files['uploads']:
+        html += f'<li><a href="{f}" target="_blank">{f}</a></li>'
+    html += '</h3><h3>Results:</h3><ul>'
+    for f in files['results']:
+        html += f'<li><a href="{f}" target="_blank">{f}</a></li>'
+    html += '</ul>'
+    
+    return html
+if __name__ in "__main__":
+    app.run(host="0.0.0.0", port=5000,debug=False)
