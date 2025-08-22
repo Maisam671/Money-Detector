@@ -31,12 +31,12 @@ def index():
                 source=upload_path,
                 save=True,
                 project='static/results',
-                name='predict', 
+                name='predict',  # YOLO will save inside static/results/predict
                 exist_ok=True
             )
 
             # Find the saved image path
-            saved_dir = Path(results[0].save_dir)  
+            saved_dir = Path(results[0].save_dir)  # Convert to Path object
             detected_files = list(saved_dir.glob("*"))
 
             if detected_files:
